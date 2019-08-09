@@ -45,6 +45,7 @@
     <Reference Include="System.Security" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseApiCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
