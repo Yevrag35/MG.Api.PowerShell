@@ -3,6 +3,12 @@
 	<PropertyGroup>
 		<TargetFramework>netcoreapp2.2</TargetFramework>
 		<RootNamespace>MG.Api.PowerShell_Core</RootNamespace>
+		<Description>Helper Library for C# PowerShell modules utilizing API requests.</Description>
+		<Copyright>Copyright © 2019 Yevrag35, LLC.</Copyright>
+		<Product>MG.Api.PowerShell</Product>
+		<Company>Yevrag35, LLC.</Company>
+		<Authors>Mike Garvey</Authors>
+		<PackageId>MG.Api.PowerShell-Core</PackageId>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -11,7 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Include="..\MG.Api.PowerShell\**\*.cs" Exclude="..\MG.Api.PowerShell\DotNet\**\*.cs;..\MG.Api.PowerShell\obj\**\*.cs;..\MG.Api.PowerShell\bin\**\*.cs;..\MG.Api.PowerShell\Properties\AssemblyInfo.cs"/>
+		<Compile Include="..\MG.Api.PowerShell\**\*.cs" Exclude="..\MG.Api.PowerShell\DotNet\**\*.cs;..\MG.Api.PowerShell\obj\**\*.cs;..\MG.Api.PowerShell\bin\**\*.cs;..\MG.Api.PowerShell\Properties\AssemblyInfo.cs" />
 	</ItemGroup>
 
 </Project>
