@@ -31,6 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.PowerShell.Commands.Utility, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_MSIL\Microsoft.PowerShell.Commands.Utility\v4.0_3.0.0.0__31bf3856ad364e35\Microsoft.PowerShell.Commands.Utility.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -45,11 +50,24 @@
     <Reference Include="System.Security" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Core\JsonObject-Core.cs" />
+    <None Include="Core\AsHashtable.cs" />
+    <Compile Include="DotNet\JsonObject-DotNet.cs" />
+    <Compile Include="Exceptions\ApiDeleteRequestException.cs" />
+    <Compile Include="Exceptions\ApiPatchRequestException.cs" />
+    <Compile Include="Exceptions\ApiPostRequestException.cs" />
+    <Compile Include="Exceptions\ApiPutRequestException.cs" />
     <Compile Include="BaseApiCmdlet.cs" />
+    <Compile Include="Exceptions\BaseApiException.cs" />
+    <Compile Include="Exceptions\ApiGetRequestException.cs" />
+    <Compile Include="Exceptions\CmdletNotReadyException.cs" />
+    <Compile Include="HttpClientExtensions.cs" />
+    <Compile Include="JsonPSObjectCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
