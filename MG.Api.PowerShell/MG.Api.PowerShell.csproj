@@ -50,9 +50,9 @@
     <Reference Include="System.Security" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Core\JsonObject-Core.cs" />
+    <None Include="Core\JsonObject.cs" />
     <None Include="Core\AsHashtable.cs" />
-    <Compile Include="DotNet\JsonObject-DotNet.cs" />
+    <Compile Include="DotNet\JsonObject.cs" />
     <Compile Include="Exceptions\ApiDeleteRequestException.cs" />
     <Compile Include="Exceptions\ApiPatchRequestException.cs" />
     <Compile Include="Exceptions\ApiPostRequestException.cs" />
