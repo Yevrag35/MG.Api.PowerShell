@@ -26,9 +26,9 @@ namespace MG.Api.PowerShell
         #endregion
 
         #region PROPERTIES
-        protected abstract string BaseUri { get; set; }
-        protected abstract Uri BaseUrl { get; set; }
-        protected abstract HttpClient HttpClient { get; set; }
+        protected abstract string BaseUri { get; }
+        protected abstract Uri BaseUrl { get; }
+        protected abstract HttpClient HttpClient { get; }
 
         #endregion
 
