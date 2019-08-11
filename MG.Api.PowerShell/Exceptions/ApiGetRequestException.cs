@@ -23,6 +23,13 @@ namespace MG.Api.PowerShell
                 base.StatusCode = code.Value;
         }
 
+        public ApiGetRequestException(string message, string url, HttpStatusCode? code, Exception e)
+            : base(message, url, e)
+        {
+            if (code.HasValue)
+                this.StatusCode = code.Value;
+        }
+
         public ApiGetRequestException(string message, Uri url, HttpStatusCode? code, Exception e)
             : base(message, url, e)
         {

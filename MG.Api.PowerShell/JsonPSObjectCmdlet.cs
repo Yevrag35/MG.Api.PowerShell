@@ -26,15 +26,36 @@ namespace MG.Api.PowerShell
             StringResults = new List<string>();
         }
 
-        protected override void ProcessRecord()
+        //protected override void ProcessRecord()
+        //{
+        //    if (StringResults != null && StringResults.Count > 0)
+        //    {
+        //        for (int i = 0; i < StringResults.Count; i++)
+        //        {
+        //            string str = StringResults[i];
+        //            if (!string.IsNullOrWhiteSpace(str))
+        //            {
+        //                ErrorRecord errRec = this.WriteJsonObject(str, _asHash);
+        //                if (errRec != null)
+        //                    base.WriteError(errRec);
+        //            }
+        //        }
+        //    }
+        //}
+
+        protected override void EndProcessing()
         {
             if (StringResults != null && StringResults.Count > 0)
             {
                 for (int i = 0; i < StringResults.Count; i++)
                 {
-                    ErrorRecord errRec = this.WriteJsonObject(StringResults[i], _asHash);
-                    if (errRec != null)
-                        base.WriteError(errRec);
+                    string str = StringResults[i];
+                    if (!string.IsNullOrWhiteSpace(str))
+                    {
+                        ErrorRecord errRec = this.WriteJsonObject(str, _asHash);
+                        if (errRec != null)
+                            base.WriteError(errRec);
+                    }
                 }
             }
         }
@@ -42,7 +63,7 @@ namespace MG.Api.PowerShell
         #endregion
 
         #region BACKEND METHODS
-        
+
 
         #endregion
     }

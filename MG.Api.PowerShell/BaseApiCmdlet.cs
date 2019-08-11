@@ -73,7 +73,8 @@ namespace MG.Api.PowerShell
             }
             catch (HttpRequestException hre)
             {
-                this.WriteError(new ApiGetRequestException(apiPath, code, hre), ErrorCategory.InvalidResult);
+                string msg = string.Format("The Api GET request did not succeed.  {0}", hre.Message);
+                this.WriteError(new ApiGetRequestException(msg, apiPath, code, hre), ErrorCategory.InvalidResult);
                 return null;
             }
         }
@@ -107,7 +108,7 @@ namespace MG.Api.PowerShell
             }
             catch (HttpRequestException hre)
             {
-                this.WriteError(new ApiGetRequestException(apiPath, code, hre), ErrorCategory.InvalidResult);
+                this.WriteError(new ApiGetRequestException(apiPath, code, hre), this.StatusCodeToCategory(code));
                 return null;
             }
         }
@@ -422,10 +423,115 @@ namespace MG.Api.PowerShell
         protected virtual Exception GetAbsoluteException(Exception e)
         {
             while (e.InnerException != null)
+
             {
                 e = e.InnerException;
             }
             return e;
+        }
+
+        /// <summary>
+        /// Converts a error status code into an <see cref="ErrorCategory"/> for 'WriteError'.
+        /// The default value is <see cref="ErrorCategory.InvalidResult"/>.
+        /// </summary>
+        /// <param name="code">The status code that may have been returned from a request.</param>
+        protected virtual ErrorCategory StatusCodeToCategory(HttpStatusCode? code)
+        {
+            ErrorCategory cat = ErrorCategory.InvalidResult;    // default
+            if (code.HasValue)
+            {
+                switch (code.Value)
+                {
+                    case HttpStatusCode.Ambiguous:
+                        cat = ErrorCategory.InvalidArgument;
+                        break;
+
+                    case HttpStatusCode.BadGateway:
+                        cat = ErrorCategory.ConnectionError;
+                        break;
+
+                    case HttpStatusCode.BadRequest:
+                        cat = ErrorCategory.SyntaxError;
+                        break;
+
+                    case HttpStatusCode.Conflict:
+                        cat = ErrorCategory.ResourceExists;
+                        break;
+
+                    case HttpStatusCode.ExpectationFailed:
+                        cat = ErrorCategory.MetadataError;
+                        break;
+
+                    case HttpStatusCode.Forbidden:
+                        cat = ErrorCategory.PermissionDenied;
+                        break;
+
+                    case HttpStatusCode.GatewayTimeout:
+                        cat = ErrorCategory.OperationTimeout;
+                        break;
+
+                    case HttpStatusCode.Gone:
+                        cat = ErrorCategory.ObjectNotFound;
+                        break;
+
+                    case HttpStatusCode.HttpVersionNotSupported:
+                        cat = ErrorCategory.ProtocolError;
+                        break;
+
+                    case HttpStatusCode.InternalServerError:
+                        cat = ErrorCategory.ReadError;
+                        break;
+
+                    case HttpStatusCode.LengthRequired:
+                        cat = ErrorCategory.InvalidData;
+                        break;
+
+                    case HttpStatusCode.MethodNotAllowed:
+                        cat = ErrorCategory.NotImplemented;
+                        break;
+
+                    case HttpStatusCode.PaymentRequired:
+                        cat = ErrorCategory.NotSpecified;
+                        break;
+
+                    case HttpStatusCode.PreconditionFailed:
+                        cat = ErrorCategory.InvalidArgument;
+                        break;
+
+                    case HttpStatusCode.ProxyAuthenticationRequired:
+                        cat = ErrorCategory.ConnectionError;
+                        break;
+
+                    case HttpStatusCode.Redirect:
+                        cat = ErrorCategory.ParserError;
+                        break;
+
+                    case HttpStatusCode.RequestTimeout:
+                        cat = ErrorCategory.OperationTimeout;
+                        break;
+
+                    case HttpStatusCode.RequestUriTooLong:
+                        cat = ErrorCategory.InvalidData;
+                        break;
+
+                    case HttpStatusCode.SeeOther:
+                        cat = ErrorCategory.ReadError;
+                        break;
+
+                    case HttpStatusCode.ServiceUnavailable:
+                        cat = ErrorCategory.DeviceError;
+                        break;
+
+                    case HttpStatusCode.Unauthorized:
+                        cat = ErrorCategory.AuthenticationError;
+                        break;
+
+                    case HttpStatusCode.UnsupportedMediaType:
+                        cat = ErrorCategory.InvalidArgument;
+                        break;
+                }
+            }
+            return cat;
         }
 
         /// <summary>
